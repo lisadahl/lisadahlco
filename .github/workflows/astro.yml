@@ -1,0 +1,54 @@
+name: Deployer
+
+on:
+  push:
+    branches: [main]
+    
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: checkout the files
+        uses: actions/checkout@v4.1.2
+      
+      - name: setup node
+        uses: actions/setup-node@v4.0.2
+        with:
+          node-version: 20.x
+        
+      - name: dependencies
+        run: npm ci
+      
+      - name: Build with Astro
+        run: npm run build  
+        
+      - name: Upload the build results
+        uses: actions/upload-artifact@v4.3.1
+        with:
+          name: output
+          path: /home/runner/work/lisadahlco/lisadahlco/dist/
+          
+          
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v4.1.4
+        id: download
+        with:
+          name: output
+     # - run: ls -R
+          
+      - name: configure s3
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-west-2
+        
+      - name: deploy to s3 bucket with list bucket perms
+        run: aws s3 sync --delete ${{steps.download.outputs.download-path}} s3://${{ secrets.AWS_S3_BUCKET }}
