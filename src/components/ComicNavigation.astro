@@ -1,0 +1,54 @@
+---
+import "../styles/global.css";
+import {getCollection } from 'astro:content';
+import { getLatestPanel } from "../api/utils";
+var urlforNavPrev = "";
+var urlforNavNext ="";
+var urlforLast = "";
+var activeClassName = "";
+
+
+const {currentSlug}=Astro.props;
+if(currentSlug)
+{
+    var split:string = currentSlug.split('/');
+    var comic = split[0];
+    var id = split[1];
+    var nextid = (parseInt(id)+1);
+    var previd = (parseInt(id)-1);
+
+    if(previd<=0)
+    previd=1;
+
+    urlforNavNext = "/comics/"+ comic + "/" + nextid;
+    urlforNavPrev = "/comics/"+comic + "/" + previd;
+    
+
+    const pages = await getCollection('comics', ({data}) => {    
+        return data;
+    })
+    var count = await getLatestPanel(comic);
+
+    urlforLast =  "/comics/"+comic + "/" + count;
+    if(nextid > count)
+    {
+        activeClassName ="hide";
+    }
+    else{
+        activeClassName ="";
+    }
+}
+
+---
+
+<div class="content_nav">
+    <button >
+        <h1 class=""><a href={`${urlforNavPrev}`}>PREV</a></h1>
+    </button>
+    <button class={activeClassName}>
+        <h1><a href={`${urlforNavNext}`}>NEXT</a></h1>
+    </button>
+    <button class={activeClassName}>
+        <h1><a href={`${urlforLast}`}>LAST</a></h1>
+    </button>
+</div>

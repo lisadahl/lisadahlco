@@ -1,0 +1,19 @@
+---
+const {title,link,subtitle,imgTitle,lastUpdated} = Astro.props;
+
+
+---
+<li>
+    <a class="" href={link}>
+        <button class="lined thin parent-for-absolute">                               
+                <h2 >{title}</h2>
+                <p class ="subparagraph">{subtitle}</p>
+            <img src={imgTitle} class="right"></img>
+        </button>
+    </a>
+    <div class="latestPopout">
+        <button class="lined thin">
+            <p class="date">Last Updated: {lastUpdated}</p>
+        </button>
+    </div>
+</li>

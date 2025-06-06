@@ -1,0 +1,1 @@
+const comicImagePath = "../../../images";

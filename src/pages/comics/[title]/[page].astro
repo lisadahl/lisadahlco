@@ -1,0 +1,49 @@
+---
+import Navigation from "../../../components/Navigation.astro";
+import Footer from "../../../components/Footer.astro";
+import type {Page} from "astro";
+import {getCollection } from 'astro:content';
+import type {CollectionEntry} from 'astro:content';
+import ComicNavigation from "../../../components/ComicNavigation.astro";
+import Meta from "../../../components/meta.astro";
+
+export async function getStaticPaths({}){
+  const pages = await getCollection('comics', ({data}) => {    
+        return data;
+    })
+  
+    const paths = pages.map(page => {
+    const [title, ...slug] = page.slug.split('/');
+    return { params: { title, page: slug.join('/') || undefined }, props: page };
+
+  });
+
+    
+    return paths;
+}
+interface Props {
+    page: Page<CollectionEntry<'comics'>>
+}
+const { title, slug } = Astro.params;
+const page:CollectionEntry<'comics'> = Astro.props;
+
+
+const { Content } = await page.render();
+
+
+---
+<Meta/>
+<body>
+<div class = "post_container">
+<Navigation />
+<ComicNavigation currentSlug={page.slug}/>
+<div class="centerContent">
+  <div class="content_display_panel">
+    <Content/>
+  </div>
+</div>
+
+<ComicNavigation currentSlug={page.slug}/>
+<Footer/>
+</div>
+</body>
