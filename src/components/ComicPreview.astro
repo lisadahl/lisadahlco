@@ -1,19 +1,15 @@
 ---
-const {title,link,subtitle,imgTitle,lastUpdated} = Astro.props;
+const {title, link, subtitle, imgTitle, lastUpdated} = Astro.props;
 
-
+//console.log({ title, link, subtitle, imgTitle, lastUpdated }); // Logs all at once
 ---
-<li>
-    <a class="" href={link}>
-        <button class="lined thin parent-for-absolute">                               
-                <h2 >{title}</h2>
-                <p class ="subparagraph">{subtitle}</p>
-            <img src={imgTitle} class="right"></img>
-        </button>
+<li class = "comic_preview ">
+   
+    <a href={link} class="comic_link_wrapper">
+        <img src={imgTitle} class="comic_previewImage" />
     </a>
-    <div class="latestPopout">
-        <button class="lined thin">
-            <p class="date">Last Updated: {lastUpdated}</p>
-        </button>
+
+    <div class="latestPopout">   
+        <p class="date">{lastUpdated}</p>
     </div>
 </li>

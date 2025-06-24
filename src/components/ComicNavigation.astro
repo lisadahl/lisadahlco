@@ -42,13 +42,7 @@ if(currentSlug)
 ---
 
 <div class="content_nav">
-    <button >
-        <h1 class=""><a href={`${urlforNavPrev}`}>PREV</a></h1>
-    </button>
-    <button class={activeClassName}>
-        <h1><a href={`${urlforNavNext}`}>NEXT</a></h1>
-    </button>
-    <button class={activeClassName}>
-        <h1><a href={`${urlforLast}`}>LAST</a></h1>
-    </button>
+    <a class="interactable_background" href={`${urlforNavPrev}`}>PREV</a>
+    <a class={activeClassName + " interactable_background"} href={`${urlforNavNext}`}>NEXT</a>
+    <a class={activeClassName + " interactable_background"} href={`${urlforLast}`}>LAST</a>
 </div>

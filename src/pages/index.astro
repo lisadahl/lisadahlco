@@ -16,21 +16,27 @@ for(var comics of ArrayOfTitles)
   var lastEntry = await getEntry('comics',comics+"/"+count);
   ArrayOfFirstEntires.push([firstEntry,lastEntry]);
 }
-var random = [];
-random = ArrayOfFirstEntires.splice(1,1);
-ArrayOfFirstEntires.push(random[0]);
+
 
 
 ---
 <Meta/>
 <body>
 <Navigation/>
-<ul class ="content_preview_list">
-  {ArrayOfFirstEntires.map(entry => (
-        <li>
-            <ComicPreview link = {"/comics/"+(entry[0].slug.split("/")[0])+"/1"} title={entry[0].data.title} imgTitle={entry[0].data.ogImage} subtitle={entry[0].data.subtitle} lastUpdated={formatDate(entry[1].data.date)}/>
-        </li> 
-    ))}
+<ul class ="content_preview_grid">
+ {
+  ArrayOfFirstEntires.map(entry => {
+    //console.log(entry[0]); 
+    return (
+            <ComicPreview 
+              link={`/comics/${entry[0].slug.split("/")[0]}/1`} 
+              title={entry[0].data.title} 
+              imgTitle={entry[0].data.ogImage} 
+              subtitle={entry[0].data.subtitle} 
+              lastUpdated={formatDate(entry[1].data.date)} 
+            />
+    );
+})}
   
 </ul>
 

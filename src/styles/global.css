@@ -1,7 +1,7 @@
 /* Register your custom font family and tell the browser where to find it. */
 @font-face {
     font-family: 'RaineFont';
-    src: url('/fonts/Raine_font_that_fucks-Regular.woff') format('woff');
+    src: url('/fonts/Dahllm_bigbase_wnumpunc-Regular.otf') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -32,47 +32,32 @@
   }
   
   body {
-    background-image: url("/style_img/grid.svg");
-    background-repeat: repeat-y repeat-x;
+    
   
   }
-  button {
-    background:white;
-    padding:0.5rem 0.5rem;
-    margin:0 0.5rem;
-    font-size:1.25rem;
-  
-    border-top-left-radius: 255px 15px;
-    border-top-right-radius: 15px 225px;
-    border-bottom-right-radius: 225px 15px;
-    border-bottom-left-radius:15px 255px;
-    box-shadow:2px 8px 4px -1px hsla(0,0%,0%,.3);
+  .basic_background {
+   
+    overflow: hidden;
+
   }
-  
-  button:hover{
-  box-shadow:2px 8px 4px -6px hsla(0,0%,0%,.3);
+.interactable_background {
+
+  padding: 0.75rem 1rem;
+  margin: 0 0.5rem;
+  font-size: 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.interactable_background:hover {
+  border-bottom:solid 3px #555;
+  transform: translateX(-2px);
   cursor: pointer;
-  }
-  button.lined.thick{
-  border:solid 3px #41403E;
-  }
-  button.dotted.thick{
-  border:dotted 3px #41403E;
-  }
-  button.dashed.thick{
-  border:dashed 3px #41403E;
-  }
-  button.lined.thin{
-  border:solid 2px #41403E;
-  }
-  button.dotted.thin{
-  border:dotted 2px #41403E;
-  }
-  button.dashed.thin{
-  border:dashed 2px #41403E;
-  }
+
+}
+
+
   .top_nav{
-    margin-top:10px;
+    margin-top:20px;
     height: 150px;
     margin-bottom: 20px;
   }
@@ -97,68 +82,68 @@
     padding-left: 0px;
     width: 80%;
     max-width: 600px;
-  
-  
+
   }
-  .content_preview_list li{
-    margin: 5px;
-    margin-bottom: 90px;
-  }
-  .parent-for-absolute
-  {
-    position:relative;
-    min-height: 125px;
-  }
-  .right
-  {
-    transition: all .4s ease;
-    -webkit-transition: all .4s ease;
-      -moz-transition: all .4s ease;
-      -ms-transition: all .4s ease;
-      -o-transition: all .4s ease;
-    position: absolute;
-    right:0px;
-    top:-80px;
-    height: 150%;
-  }
-  .parent-for-absolute:hover > .right{
-    top:-100px;
-    height: 160%;
-    -webkit-transition: all .4s ease;
-      -moz-transition: all .4s ease;
-      -ms-transition: all .4s ease;
-      -o-transition: all .4s ease;
-      transition: all .4s ease;
-  }
-  .latestPopout{
-    transition: all .4s ease;
-    position: relative;
-    display: block;
-    z-index:-1;
-    left:20px;
-    bottom:10px;
-    width:50%;
-  }
-   
-  .date
-  {
-    margin-top:15px;
-    color:gray;
-    font-size: medium;
-  }
-  .content_preview_list li button{
-  
-    width: 100%;
-    height: 100%;
-    text-align: left;
-    border: 5px solid magenta;
-  
-  }
-  .subparagraph
-  {
-    width:50%;
-  }
-  
+.comic_preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  direction:ltr;
+
+  overflow: hidden;
+
+}
+.comic_link_wrapper {
+  display: block;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+}
+
+.comic_link_wrapper img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.latestPopout {
+
+  padding: 0.75rem 1rem;
+  margin: 0 auto;
+  max-width: 600px;
+
+  font-size: 0.875rem;
+
+  border-radius: 4px;
+}
+.comic_previewImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s ease; /* Enables smooth animation */
+}
+
+.comic_link_wrapper:hover .comic_previewImage {
+  transform: scale(1.03); /* Slight zoom on hover */
+}
+
+.comic_title {
+  display: block;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 1rem 1rem 0.25rem 1rem;
+  color: #222;
+  text-decoration: none;
+}
+
+.comic_subparagraph {
+  text-align: center;
+  margin: 0 1rem 1rem 1rem;
+  color: #555;
+  font-size: 1rem;
+}
   .centerContent
   {
     text-align: center;
@@ -207,3 +192,21 @@
     margin-top:20px;
     text-align: center;
   }
+  .content_preview_grid {
+  display: grid;
+  direction:ltr;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
+  gap: 1rem; /* Adjust as needed */
+  justify-content: center; /* Centers the grid items in each row */
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+@media (max-width: 500px) {
+  .content_preview_grid {
+    grid-template-columns: 1fr; /* All items stack on top of each other */
+  }
+
+  .comic_preview {
+    margin-bottom: 1rem;
+  }
+}

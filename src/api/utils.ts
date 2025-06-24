@@ -1,20 +1,25 @@
 import { getCollection } from 'astro:content';
-//@params: none
-//@return: A array of string names of all of the comics
-export async function getAllComicNames()
-{
-    //get all comics
-    //loop through the comics and split the id by title
-    //add titles to array if that title isn't already included
-    const allcomics = await getCollection("comics");
-    var ArrayOfTitles = [];
-    const justComicTtiles = allcomics.map(comicTitle => {
-        const [title, ...slug] = comicTitle.slug.split('/');
-        if(!ArrayOfTitles.includes(title))
-        ArrayOfTitles.push(title);
-    
-      });
-      return ArrayOfTitles;
+export async function getAllComicNames() {
+  const allcomics = await getCollection("comics");
+
+  // Use a Map to track the latest date per comic title
+  const latestDatePerTitle = new Map();
+
+  for (const comic of allcomics) {
+    const [title] = comic.slug.split('/');
+    const comicDate = new Date(comic.data.date); // assuming each comic has a "date" field
+
+    if (!latestDatePerTitle.has(title) || comicDate > latestDatePerTitle.get(title)) {
+      latestDatePerTitle.set(title, comicDate);
+    }
+  }
+
+  // Convert Map to array and sort by date (most recent first)
+  const sortedTitles = Array.from(latestDatePerTitle.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([title]) => title);
+
+  return sortedTitles;
 }
 
 //params: The name of the comic you want to get
@@ -53,10 +58,9 @@ export async function getLatestPanel(comicName:string)
 export async function formatDate(date:string)
 {
     var options = {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
+
+        year: "numeric"
+
       };
       var newDate = new Date(date);
       var formattedDate = newDate.toLocaleDateString("en-US",options);
