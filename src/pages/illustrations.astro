@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import ComicPreview from '../components/ComicPreview.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Meta from "../components/meta.astro";
+import { formatDate } from '../api/utils';
+
+const illustrations = await getCollection("comics", ({ data }) => data.type === "illustration");
+
+// Utility function to extract first image from markdown body
+function extractFirstImage(markdown) {
+  const match = markdown.match(/!\[.*?\]\((.*?)\)/);
+  return match ? match[1] : null;
+}
+---
+
+<Meta />
+<body>
+  <Navigation />
+  <ul class="content_preview_grid">
+    {
+      illustrations.map((entry) => {
+        const firstImage = extractFirstImage(entry.body);
+        return (
+          <ComicPreview 
+            link={`/comics/${entry.slug}`}
+            title={entry.data.title}
+            imgTitle={firstImage} 
+            subtitle={entry.data.subtitle}
+            lastUpdated={formatDate(entry.data.date)}
+          />
+        );
+      })
+    }
+  </ul>
+  <Footer />
+</body>

@@ -127,16 +127,11 @@
 .comic_link_wrapper:hover .comic_previewImage {
   transform: scale(1.03); /* Slight zoom on hover */
 }
+.comic_link_wrapper:hover .title_overlay {
+  opacity: 1;
 
-.comic_title {
-  display: block;
-  text-align: center;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 1rem 1rem 0.25rem 1rem;
-  color: #222;
-  text-decoration: none;
 }
+
 
 .comic_subparagraph {
   text-align: center;
@@ -210,3 +205,4 @@
     margin-bottom: 1rem;
   }
 }
+

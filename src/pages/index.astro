@@ -1,44 +1,31 @@
 ---
-import Navigation from '../components/Navigation.astro';
-import Footer from '../components/Footer.astro';
-import ComicPreview from '../components/ComicPreview.astro';
-import {getCollection, getEntry } from 'astro:content';
-import { getAllComicNames, getLatestPanel,formatDate } from '../api/utils';
+const pageTitle = "About Me";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
 import Meta from "../components/meta.astro";
 
-var ArrayOfTitles = await getAllComicNames();
-var ArrayOfFirstEntires=[];
-for(var comics of ArrayOfTitles)
-{
-
-  var count = await getLatestPanel(comics);
-  var firstEntry = await getEntry('comics',comics+"/1")
-  var lastEntry = await getEntry('comics',comics+"/"+count);
-  ArrayOfFirstEntires.push([firstEntry,lastEntry]);
-}
-
-
-
 ---
-<Meta/>
-<body>
-<Navigation/>
-<ul class ="content_preview_grid">
- {
-  ArrayOfFirstEntires.map(entry => {
-    //console.log(entry[0]); 
-    return (
-            <ComicPreview 
-              link={`/comics/${entry[0].slug.split("/")[0]}/1`} 
-              title={entry[0].data.title} 
-              imgTitle={entry[0].data.ogImage} 
-              subtitle={entry[0].data.subtitle} 
-              lastUpdated={formatDate(entry[1].data.date)} 
-            />
-    );
-})}
-  
-</ul>
 
-<Footer/>
-</body>
+<html lang="en">
+    <Meta/>
+    <Navigation/>
+    <body>
+    <div class="centerContent">
+        <div class="content_display_panel">
+     
+            <span> 
+            <img src="/assets/logo.png"/>
+            <p class="left-align-text">I love to draw.</p></li>
+            </span>
+           <p class="left-align-text">I love my dogs.</p>
+    
+            
+            <span>
+            <p class="left-align-text">and my girlfriend.</p>
+            </span>
+            
+        </div>
+            <Footer/>
+            </div>
+        </body>
+</html>

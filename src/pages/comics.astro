@@ -1,0 +1,44 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import ComicPreview from '../components/ComicPreview.astro';
+import {getCollection, getEntry } from 'astro:content';
+import { getAllComicNames, getLatestPanel,formatDate } from '../api/utils';
+import Meta from "../components/meta.astro";
+
+var ArrayOfTitles = await getAllComicNames("comic");
+var ArrayOfFirstEntires=[];
+for(var comics of ArrayOfTitles)
+{
+
+  var count = await getLatestPanel(comics);
+  var firstEntry = await getEntry('comics',comics+"/1")
+  var lastEntry = await getEntry('comics',comics+"/"+count);
+  ArrayOfFirstEntires.push([firstEntry,lastEntry]);
+}
+
+
+
+---
+<Meta/>
+<body>
+<Navigation/>
+<ul class ="content_preview_grid">
+ {
+  ArrayOfFirstEntires.map(entry => {
+    //console.log(entry[0]); 
+    return (
+            <ComicPreview 
+              link={`/comics/${entry[0].slug.split("/")[0]}/1`} 
+              title={entry[0].data.title} 
+              imgTitle={entry[0].data.ogImage} 
+              subtitle={entry[0].data.subtitle} 
+              lastUpdated={formatDate(entry[1].data.date)} 
+            />
+    );
+})}
+  
+</ul>
+
+<Footer/>
+</body>

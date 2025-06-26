@@ -8,7 +8,7 @@ const {title, link, subtitle, imgTitle, lastUpdated} = Astro.props;
     <a href={link} class="comic_link_wrapper">
         <img src={imgTitle} class="comic_previewImage" />
     </a>
-
+    <span class="title_overlay">{title}</span>
     <div class="latestPopout">   
         <p class="date">{lastUpdated}</p>
     </div>

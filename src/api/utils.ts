@@ -1,15 +1,23 @@
 import { getCollection } from 'astro:content';
-export async function getAllComicNames() {
+export async function getAllComicNames(filterType) {
   const allcomics = await getCollection("comics");
+
+  // Filter by type if a valid filterType is provided
+  const filteredComics = allcomics.filter(
+    (comic) => !filterType || comic.data.type === filterType
+  );
 
   // Use a Map to track the latest date per comic title
   const latestDatePerTitle = new Map();
 
-  for (const comic of allcomics) {
+  for (const comic of filteredComics) {
     const [title] = comic.slug.split('/');
-    const comicDate = new Date(comic.data.date); // assuming each comic has a "date" field
+    const comicDate = new Date(comic.data.date);
 
-    if (!latestDatePerTitle.has(title) || comicDate > latestDatePerTitle.get(title)) {
+    if (
+      !latestDatePerTitle.has(title) ||
+      comicDate > latestDatePerTitle.get(title)
+    ) {
       latestDatePerTitle.set(title, comicDate);
     }
   }
@@ -21,6 +29,7 @@ export async function getAllComicNames() {
 
   return sortedTitles;
 }
+
 
 //params: The name of the comic you want to get
 //returns: All of the panels in a comic sorted by id
