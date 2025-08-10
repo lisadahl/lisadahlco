@@ -7,14 +7,14 @@ import { getAllComicNames, getLatestPanel,formatDate } from '../api/utils';
 import Meta from "../components/meta.astro";
 
 var ArrayOfTitles = await getAllComicNames("comic");
-var ArrayOfFirstEntires=[];
+var ArrayOfFirstEntries=[];
 for(var comics of ArrayOfTitles)
 {
 
   var count = await getLatestPanel(comics);
   var firstEntry = await getEntry('comics',comics+"/1")
   var lastEntry = await getEntry('comics',comics+"/"+count);
-  ArrayOfFirstEntires.push([firstEntry,lastEntry]);
+ ArrayOfFirstEntries.push([firstEntry,lastEntry]);
 }
 
 
@@ -27,15 +27,16 @@ for(var comics of ArrayOfTitles)
 
 <ul class ="content_preview_grid">
  {
-  ArrayOfFirstEntires.map(entry => {
+ ArrayOfFirstEntries.map(entry => {
     //console.log(entry[0]); 
     return (
             <ComicPreview 
-              link={`/comics/${entry[0].slug.split("/")[0]}/1`} 
               title={entry[0].data.title} 
-              imgTitle={entry[0].data.ogImage} 
+              imgTitle={entry[0].data.ogImage}  
               subtitle={entry[0].data.subtitle} 
-              lastUpdated={formatDate(entry[1].data.date)} 
+              lastUpdated={formatDate(entry[1].data.date)}
+              link={`/comics/${entry[0].slug.split("/")[0]}/1`} 
+
             />
     );
 })}

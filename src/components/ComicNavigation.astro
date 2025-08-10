@@ -6,6 +6,7 @@ var urlforNavPrev = "";
 var urlforNavNext ="";
 var urlforLast = "";
 var activeClassName = "";
+var urlforReturnToTop = "";
 
 
 const {currentSlug}=Astro.props;
@@ -22,6 +23,7 @@ if(currentSlug)
 
     urlforNavNext = "/comics/"+ comic + "/" + nextid;
     urlforNavPrev = "/comics/"+comic + "/" + previd;
+    urlforReturnToTop = "/comics/"
     
 
     const pages = await getCollection('comics', ({data}) => {    
@@ -41,8 +43,9 @@ if(currentSlug)
 
 ---
 
-<div class="content_nav">
+<div class="content_nav libertinus-sans-regular">
     <a class="interactable_background" href={`${urlforNavPrev}`}>PREV</a>
     <a class={activeClassName + " interactable_background"} href={`${urlforNavNext}`}>NEXT</a>
-    <a class={activeClassName + " interactable_background"} href={`${urlforLast}`}>LAST</a>
+   <!-- <a class={activeClassName + " interactable_background"} href={`${urlforLast}`}>LAST</a> -->
+    <a class={" interactable_background"} href={`${urlforReturnToTop}`}>RETURN TO COMICS</a>
 </div>
