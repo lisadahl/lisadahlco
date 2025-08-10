@@ -31,12 +31,11 @@ for(var comics of ArrayOfTitles)
     //console.log(entry[0]); 
     return (
             <ComicPreview 
-              title={entry[0].data.title} 
-              imgTitle={entry[0].data.ogImage}  
               subtitle={entry[0].data.subtitle} 
               lastUpdated={formatDate(entry[1].data.date)}
               link={`/comics/${entry[0].slug.split("/")[0]}/1`} 
-
+              title={entry[0].data.title} 
+              imgTitle={entry[0].data.ogImage}  
             />
     );
 })}
