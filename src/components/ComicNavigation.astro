@@ -31,21 +31,21 @@ if(currentSlug)
     })
     var count = await getLatestPanel(comic);
 
+    var nameOfButton = "NEXT";
+
     urlforLast =  "/comics/"+comic + "/" + count;
     if(nextid > count)
     {
-        activeClassName ="hide";
-    }
-    else{
-        activeClassName ="";
+        nameOfButton = "RETURN TO COMICS"
+        urlforNavNext = "/comics/"
     }
 }
 
 ---
 
-<div class="content_nav libertinus-sans-regular">
+<div class="content_nav">
     <a class="interactable_background" href={`${urlforNavPrev}`}>PREV</a>
-    <a class={activeClassName + " interactable_background"} href={`${urlforNavNext}`}>NEXT</a>
-   <!-- <a class={activeClassName + " interactable_background"} href={`${urlforLast}`}>LAST</a> -->
-    <a class={" interactable_background"} href={`${urlforReturnToTop}`}>RETURN TO COMICS</a>
+    <a class={activeClassName + " interactable_background"} href={`${urlforNavNext}`}>{nameOfButton}</a>
+    <!-- <a class={activeClassName + " interactable_background"} href={`${urlforLast}`}>LAST</a> -->
+    
 </div>
