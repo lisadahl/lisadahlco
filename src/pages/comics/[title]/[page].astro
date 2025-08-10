@@ -6,6 +6,7 @@ import {getCollection } from 'astro:content';
 import type {CollectionEntry} from 'astro:content';
 import ComicNavigation from "../../../components/ComicNavigation.astro";
 import Meta from "../../../components/meta.astro";
+import { getLatestPanel } from "../../../api/utils";
 
 export async function getStaticPaths({}){
   const pages = await getCollection('comics', ({data}) => {    
@@ -29,7 +30,21 @@ const page:CollectionEntry<'comics'> = Astro.props;
 
 
 const { Content } = await page.render();
+var urlforNavNext = "fish";
 
+if(page.slug)
+{
+    var split:string = page.slug.split('/');
+    var comic = split[0];
+    var id = split[1];
+    var nextid = (parseInt(id)+1);
+    var count = await getLatestPanel(comic);
+    if(nextid > count)
+    {
+        urlforNavNext = "/comics/";
+    } else
+    urlforNavNext = "/comics/"+ comic + "/" + nextid;
+}
 
 ---
 <Meta/>
@@ -39,7 +54,7 @@ const { Content } = await page.render();
 <ComicNavigation currentSlug={page.slug}/>
 <div class="centerContent">
   <div class="content_display_panel">
-    <Content/>
+    <a href={`${urlforNavNext}`}> <Content/></a>
   </div>
 </div>
 
