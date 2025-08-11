@@ -46,7 +46,6 @@
     font-family: 'Libertinus Sans', monospace;
     max-width: 90vw;
     overflow-x: hidden;
-  
   }
   
   body {
@@ -168,21 +167,24 @@
     display: inline-block;
     max-width:700px;
     text-align: center;
-    font-size:1.3rem;
+    font-size:1rem;
     background-color: white;
     -webkit-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
     -moz-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
     box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
     margin-bottom: 100px;
   }
+
   .content_display_panel img{
     max-width: 100%;
     height: auto;
   }
+
+
   .left-align-text
   {
     text-align: left;
-    padding: 5px;
+    padding: 25px;
   }
   
   .logo
@@ -191,6 +193,28 @@
     right:10px;
     height:60px;
   }
+
+ .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr; /* Two equal columns */
+      grid-template-rows: auto auto auto; /* Three rows */
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .grid-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .grid-container .text {
+      padding: 10px;
+    }
+
+
   .subtitle
   {
     max-width: 65%;
@@ -223,5 +247,16 @@
   .comic_preview {
     margin-bottom: 1rem;
   }
+
+      a {
+      color: #BDB5D5;
+      text-decoration: none; /* Optional: removes underline */
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline; /* Optional: adds underline on hover */
+    }
+
 }
 
