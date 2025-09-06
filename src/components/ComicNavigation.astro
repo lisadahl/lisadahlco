@@ -4,7 +4,6 @@ import {getCollection } from 'astro:content';
 import { getLatestPanel } from "../api/utils";
 var urlforNavPrev = "";
 var urlforNavNext ="";
-var urlforLast = "";
 var activeClassName = "";
 var urlforReturnToTop = "";
 
@@ -33,11 +32,10 @@ if(currentSlug)
 
     var nameOfButton = "NEXT";
 
-    urlforLast =  "/comics/"+comic + "/" + count;
     if(nextid > count)
     {
-        nameOfButton = "RETURN TO COMICS"
-        urlforNavNext = "/comics/"
+        nameOfButton = "RETURN TO TOP"
+        urlforNavNext = "/"
     }
 }
 
