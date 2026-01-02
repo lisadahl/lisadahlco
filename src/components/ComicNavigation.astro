@@ -21,7 +21,7 @@ if(currentSlug)
     previd=1;
 
     urlforNavNext = "/comics/"+ comic + "/" + nextid;
-    urlforNavPrev = "/comics/"+comic + "/" + previd;
+    urlforNavPrev = "/comics/"+ comic + "/" + previd;
     urlforReturnToTop = "/comics/"
     
 
@@ -35,7 +35,7 @@ if(currentSlug)
     if(nextid > count)
     {
         nameOfButton = "RETURN TO TOP"
-        urlforNavNext = "/"
+        urlforNavNext = "/../"
     }
 }
 

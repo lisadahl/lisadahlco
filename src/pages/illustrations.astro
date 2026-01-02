@@ -6,13 +6,12 @@ import Footer from '../components/Footer.astro';
 import Meta from "../components/meta.astro";
 import { formatDate } from '../api/utils';
 
-const illustrations = await getCollection("comics", ({ data }) => data.type === "illustration");
+const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,gif,webp,JPG}',{
+  eager: true
+});
 
-// Utility function to extract first image from markdown body
-function extractFirstImage(markdown) {
-  const match = markdown.match(/!\[.*?\]\((.*?)\)/);
-  return match ? match[1] : null;
-}
+const illustrations = await getCollection("comics", ({ data }) => data.type === "illustrations");
+
 ---
 
 <Meta />
@@ -21,17 +20,23 @@ function extractFirstImage(markdown) {
   <ul class="content_preview_grid libertinus-sans-regular">
     {
       illustrations.map((entry) => {
-        const firstImage = extractFirstImage(entry.body);
-        return (
-          <ComicPreview 
-            link={`/comics/${entry.slug}`}
-            title={entry.data.title}
-            imgTitle={firstImage} 
-            subtitle={entry.data.subtitle}
-            lastUpdated={formatDate(entry.data.date)}
-          />
-        );
-      })
+      const imgPath = entry.data.ogImage;
+      const normalized = imgPath.replace(/\\/g, "/");
+      const key = `${normalized}`;
+      console.log("anything?");
+
+      const importedImage = imageImports[key]; // actual imported module
+console.log("OG IMAGE:", entry.data.ogImage);
+console.log("GLOB KEYS:", Object.keys(imageImports));      return (
+        <ComicPreview
+          link={`/comics/${entry.slug}`}
+          title={entry.data.title}
+          imgTitle={importedImage.default}
+          subtitle={entry.data.subtitle}
+          lastUpdated={formatDate(entry.data.date)}
+        />
+  );
+})
     }
   </ul>
   <Footer />

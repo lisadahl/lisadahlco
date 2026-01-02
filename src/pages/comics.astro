@@ -6,6 +6,10 @@ import {getCollection, getEntry } from 'astro:content';
 import { getAllComicNames, getLatestPanel,formatDate } from '../api/utils';
 import Meta from "../components/meta.astro";
 
+const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,gif,webp}',{
+  eager: true
+});
+
 var ArrayOfTitles = await getAllComicNames("comic");
 var ArrayOfFirstEntries=[];
 for(var comics of ArrayOfTitles)
@@ -14,7 +18,25 @@ for(var comics of ArrayOfTitles)
   var count = await getLatestPanel(comics);
   var firstEntry = await getEntry('comics',comics+"/1")
   var lastEntry = await getEntry('comics',comics+"/"+count);
- ArrayOfFirstEntries.push([firstEntry,lastEntry]);
+    if(!firstEntry.data.ogImage){
+      console.error("Missing ogImage for: ", comics,firstEntry);
+    }
+    const rawPath = firstEntry.data.ogImage;
+    const normalized = rawPath.replace(/\\/g, "/");
+    const key = `${normalized}`;
+
+    const imageModule = imageImports[key];
+
+    if(!imageModule){
+      console.error("image not found in glob: ", key);
+    }
+    const imgUrl = (imageModule as {default: string }| undefined)?.default;
+     ArrayOfFirstEntries.push({
+      firstEntry,
+      lastEntry,
+      imgUrl
+    });
+
 }
 
 
@@ -28,14 +50,13 @@ for(var comics of ArrayOfTitles)
 <ul class ="content_preview_grid">
  {
  ArrayOfFirstEntries.map(entry => {
-    //console.log(entry[0]); 
     return (
             <ComicPreview 
-              subtitle={entry[0].data.subtitle} 
-              lastUpdated={formatDate(entry[1].data.date)}
-              link={`/comics/${entry[0].slug.split("/")[0]}/1`} 
-              title={entry[0].data.title} 
-              imgTitle={entry[0].data.ogImage}  
+              lastUpdated={formatDate(entry.firstEntry.data.date)}
+              link={`/comics/${entry.firstEntry.slug.split("/")[0]}/1`} 
+              title={entry.firstEntry.data.title} 
+              imgTitle={entry.imgUrl} 
+               
             />
     );
 })}

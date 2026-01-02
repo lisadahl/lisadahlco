@@ -5,11 +5,11 @@ const {title, link, subtitle, imgTitle, lastUpdated} = Astro.props;
 ---
 <li class = "comic_preview libertinus-sans-regular">
     <span class="title_overlay">{title} - {lastUpdated}</span>
-    <!--<div class="latestPopout">   
-        <p class="date">{lastUpdated}</p>
-    </div> -->
     <a href={link} class="comic_link_wrapper">
-        <img src={imgTitle} class="comic_previewImage" />
+        <img 
+            src={imgTitle.src} 
+            class="comic_previewImage" 
+            />
     </a>
 
 </li>

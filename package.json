@@ -1,12 +1,15 @@
 {
   "name": "lisadahlco",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate": "node scripts/generate.js",
+    "testgen": "node scripts/test.js"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.2.0",
