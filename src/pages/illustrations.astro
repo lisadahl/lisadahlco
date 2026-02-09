@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import Meta from "../components/meta.astro";
 import { formatDate } from '../api/utils';
 
-const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,gif,webp,JPG}',{
+const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,gif,webp,JPG,JPEG}',{
   eager: true
 });
 
@@ -23,11 +23,13 @@ const illustrations = await getCollection("comics", ({ data }) => data.type === 
       const imgPath = entry.data.ogImage;
       const normalized = imgPath.replace(/\\/g, "/");
       const key = `${normalized}`;
-      console.log("anything?");
 
-      const importedImage = imageImports[key]; // actual imported module
-console.log("OG IMAGE:", entry.data.ogImage);
-console.log("GLOB KEYS:", Object.keys(imageImports));      return (
+      const importedImage = imageImports[key];
+      if(!importedImage){
+        console.error("Image not in glob");
+        return null; // Skip rendering this entry
+      }
+    return (
         <ComicPreview
           link={`/comics/${entry.slug}`}
           title={entry.data.title}
