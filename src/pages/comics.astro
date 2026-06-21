@@ -6,7 +6,7 @@ import {getCollection, getEntry } from 'astro:content';
 import { getAllComicNames, getLatestPanel,formatDate } from '../api/utils';
 import Meta from "../components/meta.astro";
 
-const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,gif,webp}',{
+const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,JPG,gif,webp}',{
   eager: true
 });
 
