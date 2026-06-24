@@ -5,19 +5,28 @@ import ComicPreview from '../components/ComicPreview.astro';
 import {getCollection, getEntry } from 'astro:content';
 import { getAllComicNames, getLatestPanel,formatDate } from '../api/utils';
 import Meta from "../components/meta.astro";
+import Logo from '../components/Logo.astro';
 
-const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,JPG,JPEG,gif,webp}',{
+const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,JPG,gif,webp,JPEG}',{
   eager: true
 });
 
-var ArrayOfTitles = await getAllComicNames("comic");
+var ArrayOfTitles = await getAllComicNames("pages");
 var ArrayOfFirstEntries=[];
 for(var comics of ArrayOfTitles)
 {
+ console.error("Processing comic: ", comics);
   var count = await getLatestPanel(comics);
   var firstEntry = await getEntry('comics',comics+"/1")
   var lastEntry = await getEntry('comics',comics+"/"+count);
-    if(!firstEntry.data.ogImage){
+  var type = firstEntry.data.type;
+ 
+  if(!type === "pages") {
+    console.error("Entry is not of type");
+    return;
+  }
+  
+  if(!firstEntry.data.ogImage){
       //console.error("Missing ogImage for: ", comics,firstEntry);
     }
     const rawPath = firstEntry.data.ogImage;
