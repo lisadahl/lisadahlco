@@ -19,7 +19,6 @@ export async function getStaticPaths({}){
 
   });
 
-    
     return paths;
 }
 interface Props {
@@ -34,14 +33,16 @@ var urlforNavNext = "fish";
 
 if(page.slug)
 {
-    var split:string = page.slug.split('/');
+    var split:string[] = page.slug.split('/');
     var comic = split[0];
     var id = split[1];
     var nextid = (parseInt(id)+1);
     var count = await getLatestPanel(comic);
+    var basePath = page.data.type === "drafts" ? "/drafts/" : "/comics/";
+
     if(nextid > count)
     {
-        urlforNavNext = "/comics/";
+        urlforNavNext = basePath;
     } else
     urlforNavNext = "/comics/"+ comic + "/" + nextid;
 }
@@ -51,14 +52,15 @@ if(page.slug)
 <body>
 <div class = "post_container">
 <Navigation />
-<ComicNavigation currentSlug={page.slug}/>
+<!-- 1. Pass the frontmatter type here -->
+<ComicNavigation currentSlug={page.slug} type={page.data.type}/>
 <div class="centerContent">
   <div class="content_display_panel">
     <a href={`${urlforNavNext}`}> <Content/></a>
   </div>
 </div>
-
-<ComicNavigation currentSlug={page.slug}/>
+<!-- 2. Pass the frontmatter type here too -->
+<ComicNavigation currentSlug={page.slug} type={page.data.type}/>
 <Footer/>
 </div>
 </body>

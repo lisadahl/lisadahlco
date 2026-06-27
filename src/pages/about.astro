@@ -1,0 +1,48 @@
+---
+const pageTitle = "About Lisa";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import Meta from "../components/meta.astro";
+
+---
+
+
+<html lang="en">
+
+    <style>
+        .left-align-text a {
+            font-weight: 700;
+            text-decoration: underline;
+        }
+    </style>
+
+    <Meta/>
+
+    <Navigation/>
+    <body>
+
+        <div class="centerContent">
+            <div class="content_display_panel custom_override">
+
+                <div class="left-align-text">
+        <h3>About Lisa</h3><br />
+        <p>Lisa (she/they) is currently studying for an <a href="https://www.cca.edu/academics/degrees/mfa-comics/">MFA in Comics</a> at the California College of the Arts. She graduates July 2027.
+        <p>She lives on Camano Island, WA with her girlfriend <b><a href="https://absolutelyprobablynot.com">Raine</a></b> and their kids and corgis.</p><br />
+        She loves to read and draw about sci-fi, queer romance and memoir.  During the day, she works at a video game studio.
+        Her dream is to open a Comics Library & Workshop in the Seattle area.</p><br />
+        <p>You can reach Lisa at <b><a href="mailto:dahllm@gmail.com">dahllm@gmail.com</a></b> or <b>Dahllm</b> on Discord and <a href="https://instagram.com/dahllm">Instagram</a>!</p><br /><br />
+        <h3>Conventions</h3><br />
+        <ul style="margin: 0 0 1rem 1.5rem; padding-left: 1.5rem;">
+          <li><a target="_blank" href="https://www.smallpressexpo.com/">Small Press Expo (SPX)</a>, Bethesda, MD (September 2026) - Upcoming!</li>
+          <li><a target="_blank" href="https://portal.cca.edu/events-calendar/comics-city-summer-2025-series/emanata-gallery-show-opening-reception-2025/">CCA Emanata Gallery Show</a>, San Francisco, CA (July 2026) - Upcoming!</li>
+          <li><i><a target="_blank" href="https://prideinpanels.net/">Pride in Panels</a>, San Francisco, CA (February 2026) - Exhibited</i></li>
+          <li><i><a target="_blank" href="https://www.vancaf.org/">Vancouver Comics & Arts Festival</a>, Vancouver, Canada (May 2024) - Exhibited</i></li>
+        </ul>
+        <img src="/assets/convention.jpg" alt="A picture of my convention table at 2026 Pride in Panels.">
+        
+    </div>
+        </div> 
+            <Footer/>
+       </div>
+        </body>
+</html>

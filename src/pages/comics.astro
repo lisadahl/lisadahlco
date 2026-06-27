@@ -10,7 +10,7 @@ const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,JPG,JPEG,gif
   eager: true
 });
 
-var ArrayOfTitles = await getAllComicNames("comic");
+var ArrayOfTitles = await getAllComicNames("comics");
 var ArrayOfFirstEntries=[];
 for(var comics of ArrayOfTitles)
 {

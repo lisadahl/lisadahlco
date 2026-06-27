@@ -8,7 +8,7 @@ var activeClassName = "";
 var urlforReturnToTop = "";
 
 
-const {currentSlug}=Astro.props;
+const {currentSlug, type}=Astro.props;
 if(currentSlug)
 {
     var split:string = currentSlug.split('/');
@@ -22,7 +22,7 @@ if(currentSlug)
 
     urlforNavNext = "/comics/"+ comic + "/" + nextid;
     urlforNavPrev = "/comics/"+ comic + "/" + previd;
-    urlforReturnToTop = "/comics/"
+    urlforReturnToTop = "/../"
     
 
     const pages = await getCollection('comics', ({data}) => {    
@@ -35,7 +35,8 @@ if(currentSlug)
     if(nextid > count)
     {
         nameOfButton = "RETURN TO TOP"
-        urlforNavNext = "/../"
+        urlforNavNext = "/" + type;
+        //urlforNavNext = "/../" 
     }
 }
 

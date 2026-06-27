@@ -11,7 +11,7 @@ const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,JPG,gif,webp
   eager: true
 });
 
-var ArrayOfTitles = await getAllComicNames("pages");
+var ArrayOfTitles = await getAllComicNames("drafts");
 var ArrayOfFirstEntries=[];
 for(var comics of ArrayOfTitles)
 {
@@ -21,7 +21,7 @@ for(var comics of ArrayOfTitles)
   var lastEntry = await getEntry('comics',comics+"/"+count);
   var type = firstEntry.data.type;
  
-  if(!type === "pages") {
+  if(!type === "drafts") {
     console.error("Entry is not of type");
     return;
   }
