@@ -1,0 +1,32 @@
+---
+const pageTitle = "About Lisa";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import Meta from "../components/meta.astro";
+
+---
+
+
+<html lang="en">
+
+    <style>
+        .left-align-text a {
+            font-weight: 700;
+            text-decoration: underline;
+        }
+    </style>
+    <script slot="shop" defer src="https://cdn.ko-fi.tools/v2/js/shop.js"></script>
+    <Meta/>
+
+    <Navigation/>
+    <body>
+
+        <div class="centerContent">
+
+        <div id="kofi-shop-embed" data-shop-id="N4N71W748" data-shop-currency="$" data-shop-theme="default" data-shop-soldout="show"></div>
+        
+
+            <Footer/>
+</div>
+        </body>
+</html>

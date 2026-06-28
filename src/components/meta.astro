@@ -34,5 +34,10 @@ const twitterSite = "";
   {featuredImage && <meta name="twitter:image" content={featuredImage} />}
   {twitterSite && <meta name="twitter:site" content={twitterSite} />}
 
+  <slot name="shop" />
 
 </head>
+
+<body>
+  <slot />
+</body>

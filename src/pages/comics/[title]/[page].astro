@@ -55,7 +55,7 @@ if(page.slug)
 <!-- 1. Pass the frontmatter type here -->
 <ComicNavigation currentSlug={page.slug} type={page.data.type}/>
 <div class="centerContent">
-  <div class="content_display_panel">
+  <div class={page.data.type === "illustrations" ? "content_display_panel illustration_display" : "content_display_panel"}>
     <a href={`${urlforNavNext}`}> <Content/></a>
   </div>
 </div>
