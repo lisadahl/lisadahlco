@@ -162,18 +162,17 @@
   }
   .content_display_panel
   {
-    margin:10px;
-    padding:5px;
+    margin: 10px auto 100px;
+    padding: 5px;
     display: inline-block;
     width: 100%;
     max-width: 600px;
     text-align: center;
-    font-size:1rem;
+    font-size: 1rem;
     background-color: white;
     -webkit-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
     -moz-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
     box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
-    margin-bottom: 100px;
   }
 
   .content_display_panel.illustration_display {
@@ -182,9 +181,10 @@
   }
 
   .custom_override {
-    max-width:600px;
+    max-width: 600px;
     text-align: left;
     margin-left: 50px;
+    margin-right: 50px;
   }
 
   .content_display_panel img{
@@ -214,6 +214,28 @@
     flex: 1 1 auto;
     min-width: 0;
     padding-top: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    .homepage_two_column {
+      flex-direction: column;
+      width: 100%;
+      max-width: 100%;
+      gap: 1rem;
+    }
+
+    .homepage_left_column,
+    .homepage_right_column {
+      flex: 1 1 auto;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .custom_override {
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+      max-width: calc(100vw - 1.5rem);
+    }
   }
 
   .left-align-text
@@ -295,3 +317,110 @@
 
 }
 
+/* base: mobile-first */
+.top_nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  z-index: 40;
+}
+
+
+.nav_toggle {
+  font-size: 1.6rem;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  padding: 0.5rem 0.75rem;
+
+  box-shadow: 2px 6px 6px 1px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+  z-index: 50;
+}
+
+.nav_toggle:hover {
+  box-shadow: 2px 6px 6px -3px rgba(0, 0, 0, 0.3);
+}
+
+/* menu default: hidden and not taking layout space on mobile */
+.nav_menu {
+  display: none;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+  
+}
+
+/* when open on mobile, make a fixed horizontal top bar */
+.top_nav.open {
+  position: sticky;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 0.5rem 0rem;
+
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* show and layout horizontally when open */
+.top_nav.open .nav_menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0rem;
+  width: 100%;
+
+}
+
+/* ensure logo and toggle sit on the same row */
+.logo {
+  height: 48px;
+  margin-left: auto; /* pushes logo to the right */
+}
+
+/* desktop: always horizontal, hamburger hidden */
+@media (min-width: 768px) {
+  .nav_toggle { display: none; }
+  .top_nav { position: relative; padding: 1rem; }
+  .nav_menu {
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    width: auto;
+  }
+  .logo { margin-left: 1rem; height: 60px; }
+}
+
+/* small niceties */
+.top_nav_item button { white-space: nowrap; }
+.top_nav.open + * { margin-top: 72px; } /* push page content down when fixed top is open (optional) */
+  img[src="/style_img/biopic.png"] {
+  border: 5px solid black;
+}
+  .top_nav_item
+  {
+    font-size: large;
+  }
+  .content_nav{
+
+    margin:auto;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .hide
+  {
+    display: none;
+  }
+  
+    .logo
+  {
+    position: absolute;
+    right:10px;
+    height:60px;
+  }
