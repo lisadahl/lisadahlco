@@ -197,6 +197,25 @@
     height: auto;
   }
 
+  .homepage_two_column {
+    display: flex;
+    gap: 2rem;
+    width: 85vw;
+    max-width: 85vw;
+    align-items: flex-start;
+  }
+
+  .homepage_left_column {
+    flex: 0 0 480px;
+    min-width: 480px;
+  }
+
+  .homepage_right_column {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-top: 1rem;
+  }
+
   .left-align-text
   {
     text-align: left;

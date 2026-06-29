@@ -3,7 +3,8 @@ const pageTitle = "lisadahl.co - Lisa Dahl's Portfolio";
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
 import Meta from "../components/meta.astro";
-
+import Parser from 'rss-parser';
+import SubstackFeed from '../components/SubstackFeed.astro';
 ---
 
 
@@ -14,15 +15,18 @@ import Meta from "../components/meta.astro";
     <Navigation/>
     <body>
 
- <div class="centerContent">
-        <div class="content_display_panel custom_override">
-            <img src="/assets/20250810-fixedsplash.jpg" alt="Image of Lisa drawing on a table and thinking about her characters." class="home_page_image"><br /><br />
-             <div class="centerContent">
-            <h3>Subscribe for Updates!</h3><br />
-            <iframe src="https://dahllm.substack.com/embed" width="480" height="320" style="border: 1px solid #EEE; background: white"></iframe>
+<div class="centerContent"> 
+        <div class="content_display_panel custom_override homepage_two_column">
+            <div class="homepage_left_column">
+                <img src="/assets/20250810-fixedsplash.jpg" alt="Image of Lisa drawing on a table and thinking about her characters." class="home_page_image"><br /><br />
+                    <iframe src="https://dahllm.substack.com/embed" width="480" height="320" style="border: 1px solid #EEE; background: white"></iframe>
+            </div>
+            <div class="homepage_right_column">
+                <h2>Recent Updates</h2><br />
+                <SubstackFeed />
             </div>
         </div> 
             <Footer/>
-       </div>
+      </div> 
         </body>
 </html>
