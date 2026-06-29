@@ -3,27 +3,11 @@ import Parser from 'rss-parser';
 
 const SUBSTACK_FEED_URL = 'https://dahllm.substack.com/feed';
 
-const parser = new Parser({
-  customFields: {
-    item: ['media:content', 'content']
-  }
-});
-
+const parser = new Parser();
 let posts = [];
 
 try {
-  const response = await fetch(SUBSTACK_FEED_URL, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0'
-    }
-  });
-
-  if (!response.ok) {
-    throw new Error(`Substack feed request failed: ${response.status}`);
-  }
-
-  const xml = await response.text();
-  const feed = await parser.parseString(xml);
+  const feed = await parser.parseURL(SUBSTACK_FEED_URL);
   const items = Array.isArray(feed?.items) ? feed.items : [];
 
   posts = items.slice(0, 3).map((item) => {
@@ -37,12 +21,6 @@ try {
       item?.['media:content']?.$?.url ||
       (match ? match[1] : null);
 
-    const summaryText = (item?.contentSnippet || item?.content || '')
-      .toString()
-      .replace(/<[^>]+>/g, '')
-      .replace(/\s+/g, ' ')
-      .trim();
-
     return {
       title: item?.title || 'Untitled post',
       link: item?.link || '#',
@@ -53,7 +31,8 @@ try {
             year: 'numeric'
           })
         : '',
-      summary: summaryText || 'Read more on Substack.',
+      summary:
+        (item?.contentSnippet || item?.content || '').toString().replace(/<[^>]+>/g, '').split('\n')[0].trim() || 'Read more on Substack.',
       coverImage
     };
   });
