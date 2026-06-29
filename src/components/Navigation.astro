@@ -4,55 +4,28 @@ import "../styles/global.css";
 <header class="top_nav libertinus-sans-regular">
    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata"></link> -->
 
-  <button
-    id="nav_toggle"
+  <input id="nav_toggle" class="nav_toggle_input" type="checkbox" aria-hidden="true" />
+  <label
+    for="nav_toggle"
     class="nav_toggle lined thin"
     aria-label="Toggle navigation"
+    aria-controls="nav_menu"
     aria-expanded="false"
-    onclick="toggleNav()"
-  >☰</button>
+  >☰</label>
 
-    <nav id="nav_menu" class="nav_menu" role="navigation" aria-label="Main">
-      <a class="top_nav_item interactable_background" href="/">HOME</a>
-      <a class="top_nav_item interactable_background" href="/comics">BOOKS</a>
-      <a class="top_nav_item interactable_background" href="/drafts">PAGES</a>
-      <a class="top_nav_item interactable_background" href="/illustrations">PICS</a>
-      <a class="top_nav_item interactable_background" href="/shop">SHOP</a>
-      <a class="top_nav_item interactable_background" href="/about">ABOUT LISA</a>
-   </nav>
+  <nav id="nav_menu" class="nav_menu" role="navigation" aria-label="Main">
+    <a class="top_nav_item interactable_background" href="/">HOME</a>
+    <a class="top_nav_item interactable_background" href="/comics">BOOKS</a>
+    <a class="top_nav_item interactable_background" href="/drafts">PAGES</a>
+    <a class="top_nav_item interactable_background" href="/illustrations">PICS</a>
+    <a class="top_nav_item interactable_background" href="/shop">SHOP</a>
+    <a class="top_nav_item interactable_background" href="/about">ABOUT LISA</a>
+  </nav>
 
-<!-- Adding Libertinus Sans font 08/09/2025 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <!-- Adding Libertinus Sans font 08/09/2025 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
-<script is:inline>
-    function toggleNav() {
-      const header = document.getElementById('top_nav');
-      const menu = document.getElementById('nav_menu');
-      const toggle = document.getElementById('nav_toggle');
-      const isOpen = header.classList.toggle('open');
-      //menu.classList.toggle('show', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-      // prevent body scroll when menu is open
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    }
-    // Close on Escape and click outside
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const header = document.getElementById('top_nav');
-        if (header && header.classList.contains('open')) toggleNav();
-      }
-    });
-    document.addEventListener('click', (e) => {
-      const header = document.getElementById('top_nav');
-      const toggle = document.getElementById('nav_toggle');
-      const menu = document.getElementById('nav_menu');
-      if (!header || !header.classList.contains('open')) return;
-      if (toggle.contains(e.target) || menu.contains(e.target)) return;
-      toggleNav();
-    });
-  </script>   
-
-   <img class="logo" src="/assets/logo.png"/>
+  <img class="logo" src="/assets/logo.png"/>
 </header>

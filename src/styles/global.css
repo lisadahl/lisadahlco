@@ -328,6 +328,10 @@
 }
 
 
+.nav_toggle_input {
+  display: none;
+}
+
 .nav_toggle {
   font-size: 1.6rem;
   background-color: white;
@@ -335,7 +339,9 @@
   cursor: pointer;
   margin-right: 0.5rem;
   padding: 0.5rem 0.75rem;
-
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 2px 6px 6px 1px rgba(0, 0, 0, 0.3);
   transition: box-shadow 0.3s ease;
   z-index: 50;
@@ -348,11 +354,17 @@
 /* menu default: hidden and not taking layout space on mobile */
 .nav_menu {
   display: none;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  
+  overflow-x: auto;
+}
+
+.nav_toggle_input:checked ~ .nav_menu {
+  display: flex;
 }
 
 /* when open on mobile, make a fixed horizontal top bar */
@@ -362,19 +374,7 @@
   right: 0;
   top: 0;
   padding: 0.5rem 0rem;
-
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-}
-
-/* show and layout horizontally when open */
-.top_nav.open .nav_menu {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 0rem;
-  width: 100%;
-
 }
 
 /* ensure logo and toggle sit on the same row */
@@ -385,6 +385,7 @@
 
 /* desktop: always horizontal, hamburger hidden */
 @media (min-width: 768px) {
+  .nav_toggle_input,
   .nav_toggle { display: none; }
   .top_nav { position: relative; padding: 1rem; }
   .nav_menu {
