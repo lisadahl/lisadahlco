@@ -1,7 +1,7 @@
 ---
 import Parser from 'rss-parser';
 
-const SUBSTACK_FEED_URL = 'https://dahllm.substack.com/feed';
+const FEED_PROXY_URL = '/api/substack-feed';
 
 const parser = new Parser({
   customFields: {
@@ -12,11 +12,7 @@ const parser = new Parser({
 let posts = [];
 
 try {
-  const response = await fetch(SUBSTACK_FEED_URL, {
-    headers: {
-      'User-Agent': 'Mozilla/5.0'
-    }
-  });
+  const response = await fetch(FEED_PROXY_URL);
 
   if (!response.ok) {
     throw new Error(`Substack feed request failed: ${response.status}`);
