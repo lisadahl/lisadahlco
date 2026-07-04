@@ -23,7 +23,7 @@ try {
 
     return {
       title: item?.title || 'Untitled post',
-      link: item?.link || '#',
+      link: item?.link || '#', 
       pubDate: item?.pubDate
         ? new Date(item.pubDate).toLocaleDateString('en-US', {
             month: 'short',
