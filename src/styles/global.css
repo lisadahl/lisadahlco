@@ -187,6 +187,10 @@
     margin-right: 50px;
   }
 
+  .custom_substack_override {
+    max-width:85%;
+  }
+
   .content_display_panel img{
     max-width: 100%;
     height: auto;
