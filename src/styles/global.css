@@ -215,9 +215,25 @@
   }
 
   .homepage_right_column {
-    flex: 1 1 auto;
+    flex: 0 0 520px;
+    max-width: 520px;
     min-width: 0;
-    padding-top: 1rem;
+    padding: 1rem;
+    margin-left: 1rem;
+    border: 1px solid #EEE;
+    border-radius: 14px;
+    background: #fff;
+  }
+
+  .homepage_right_column .substack-post-embed {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto 1rem;
+  }
+
+  .homepage_two_column {
+    align-items: flex-start;
+    justify-content: center;
   }
 
   @media (max-width: 900px) {
