@@ -1,0 +1,99 @@
+---
+const pageTitle = "Lisa's melonJS game";
+import Navigation from "../components/Navigation.astro";
+import Footer from "../components/Footer.astro";
+import Meta from "../components/meta.astro";
+
+---
+
+<html lang="en">
+
+    <style>
+        .melonjs-demo {
+            margin: 2rem auto;
+            max-width: 900px;
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            background: #111;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+        #melonjs-demo {
+            width: 100%;
+            min-height: 420px;
+            background: #111;
+        }
+        #melonjs-demo p {
+            margin: 0;
+            padding: 2rem;
+            text-align: center;
+            color: #eee;
+        }
+    </style>
+    <script slot="shop" type="module">
+        import * as me from "melonjs";
+
+        function initMelonDemo() {
+            const container = document.getElementById("melonjs-demo");
+            if (!container) {
+                return;
+            }
+
+            const app = new me.Application(640, 360, {
+                parent: container,
+                scale: "auto",
+                scaleMethod: "fit-width",
+                renderer: 2,
+                backgroundColor: "#111111",
+                antialias: true,
+            });
+
+            class BouncingBox extends me.Renderable {
+                constructor(x, y, width, height, color) {
+                    super(x, y, width, height);
+                    this.vel = 120;
+                    this.color = color;
+                }
+
+                update(dt) {
+                    this.pos.x += this.vel * dt / 1000;
+                    if (this.pos.x <= 0 || this.pos.x + this.width >= 640) {
+                        this.vel = -this.vel;
+                    }
+                    return true;
+                }
+
+                draw(renderer) {
+                    renderer.setColor(this.color);
+                    renderer.fillRect(this.pos.x, this.pos.y, this.width, this.height);
+                }
+            }
+
+            app.world.addChild(new me.ColorLayer("background", 0, { color: "#111" }));
+            app.world.addChild(new BouncingBox(24, 140, 120, 72, "#ffcc00"));
+            app.world.addChild(new BouncingBox(260, 220, 136, 60, "#22aaff"));
+            app.world.addChild(new BouncingBox(440, 90, 96, 96, "#ff77cc"));
+        }
+
+        if (document.readyState !== "loading") {
+            initMelonDemo();
+        } else {
+            document.addEventListener("DOMContentLoaded", initMelonDemo);
+        }
+    </script>
+    <Meta/>
+
+    <Navigation/>
+    <body>
+
+        <div class="centerContent">
+            <div class="melonjs-demo">
+                <h2>melonJS Demo</h2>
+                <div id="melonjs-demo"><p>Loading melonJS...</p></div>
+            </div>
+
+            <Footer/>
+        </div>
+        </body>
+</html>
