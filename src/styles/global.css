@@ -44,14 +44,11 @@
   html,
   body {
     font-family: 'Libertinus Sans', monospace;
-    max-width: 90vw;
+    width: 100%;
+    max-width: none;
     overflow-x: hidden;
   }
   
-  body {
-    
-  
-  }
   .basic_background {
    
     overflow: hidden;
@@ -170,9 +167,7 @@
     text-align: center;
     font-size: 1rem;
     background-color: white;
-    -webkit-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
-    -moz-box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
-    box-shadow: 0px 0px 18px -1px rgba(0,0,0,0.26);
+
   }
 
   .content_display_panel.illustration_display {
@@ -180,15 +175,24 @@
     max-width: 70vw;
   }
 
+  .content_display_panel.wingfoiling_display {
+    max-width: 850px;
+    padding: 0;
+  }
+
+  .content_display_panel.wingfoiling_display img {
+    width: 100%;
+  }
+
   .custom_override {
-    max-width: 600px;
+    max-width: 800px;
     text-align: left;
     margin-left: 50px;
     margin-right: 50px;
   }
 
   .custom_substack_override {
-    max-width:85%;
+    max-width:95%;
   }
 
   .content_display_panel img{
@@ -271,12 +275,17 @@
     height:60px;
   }
 
+  .navigation_images
+  {
+    width: 100%;
+  }
+
  .grid-container {
       display: grid;
       grid-template-columns: 1fr 1fr; /* Two equal columns */
       grid-template-rows: auto auto auto; /* Three rows */
       gap: 20px;
-      max-width: 1000px;
+      max-width: 800px;
       margin: 0 auto;
       align-items: center;
     }
@@ -337,14 +346,25 @@
 
 }
 
-/* base: mobile-first */
+/* Navigation: vertical sidebar on desktop, compact dropdown on small screens. */
 .top_nav {
-  position: relative;
+  position: fixed;
+  inset: 0 auto 0 0;
   display: flex;
-  align-items: center;
-  width: 100%;
-  padding: 0.75rem 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 190px;
+  height: 100vh;
+  margin: 0;
+  padding: 1.25rem 0.75rem;
+  overflow-y: auto;
+  background: #fff;
+  border-right: 1px solid #eee;
   z-index: 40;
+}
+
+body {
+  padding-left: 190px;
 }
 
 
@@ -371,56 +391,79 @@
   box-shadow: 2px 6px 6px -3px rgba(0, 0, 0, 0.3);
 }
 
-/* menu default: hidden and not taking layout space on mobile */
 .nav_menu {
-  display: none;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 0.35rem;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  overflow-x: auto;
-}
-
-.nav_toggle_input:checked ~ .nav_menu {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  width: 100%;
+  overflow: visible;
 }
 
-/* when open on mobile, make a fixed horizontal top bar */
-.top_nav.open {
-  position: sticky;
-  left: 0;
-  right: 0;
-  top: 0;
-  padding: 0.5rem 0rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+.top_nav .top_nav_item {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0.5rem;
 }
 
-/* ensure logo and toggle sit on the same row */
-.logo {
-  height: 48px;
-  margin-left: auto; /* pushes logo to the right */
+.top_nav .interactable_background:hover {
+  border-bottom: 0;
+  transform: translateX(3px);
 }
 
-/* desktop: always horizontal, hamburger hidden */
+.navigation_images {
+  display: block;
+  width: 100%;
+  max-width: 160px;
+  height: auto;
+}
+
+/* Keep the sidebar list visible on desktop. */
 @media (min-width: 768px) {
   .nav_toggle_input,
   .nav_toggle { display: none; }
-  .top_nav { position: relative; padding: 1rem; }
-  .nav_menu {
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-    width: auto;
-  }
-  .logo { margin-left: 1rem; height: 60px; }
 }
 
-/* small niceties */
+/* On narrow screens, place the vertical list below a menu toggle. */
+@media (max-width: 767px) {
+  body {
+    padding-left: 0;
+  }
+
+  .top_nav {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    overflow: visible;
+    border-right: 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav_toggle {
+    display: inline-flex;
+  }
+
+  .nav_menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: min(220px, 85vw);
+    padding: 0.75rem;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  }
+
+  .nav_toggle_input:checked ~ .nav_menu {
+    display: flex;
+  }
+}
+
 .top_nav_item button { white-space: nowrap; }
-.top_nav.open + * { margin-top: 72px; } /* push page content down when fixed top is open (optional) */
   img[src="/style_img/biopic.png"] {
   border: 5px solid black;
 }

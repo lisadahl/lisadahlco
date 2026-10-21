@@ -12,25 +12,20 @@ import SubstackFeed from "../components/SubstackFeed.astro";
 
     <Meta/>
     
-    <Navigation/>
+    <Navigation hideHome={true}/>
     <body>
 
-<div class="centerContent"> 
-        <div class="content_display_panel custom_override homepage_two_column">
-            <div class="homepage_left_column">
-                <img src="/assets/20250810-fixedsplash.jpg" alt="Image of Lisa drawing on a table and thinking about her characters." width="80%"><br /><br />
+        <div class="content_display_panel custom_override">
+            <img src="/assets/Site_Title.png" alt="A drawing of Lisa's logo." class="page_image" width="75%" align="center"/><br /><br />
                     <iframe src="https://dahllm.substack.com/embed" width="80%" height="320" style="border: 1px solid #EEE; background: white"></iframe>
-            </div>
-            <div class="homepage_right_column">
-                <h2>Recent Updates</h2><br />
+                <br /><br />
+            <h2>Recent Updates</h2><br />
             <!--   <SubstackFeed />-->
-               <div class="substack-post-embed"><p lang="en">Diagnosing Banshee Debuts at SPX 2026!</p><p>And more notes on a very packed Fall 2026</p><a data-post-link href="https://dahllm.substack.com/p/diagnosing-banshee-debuts-at-spx">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
+            <div class="substack-post-embed"><p lang="en">Diagnosing Banshee Debuts at SPX 2026!</p><p>And more notes on a very packed Fall 2026</p><a data-post-link href="https://dahllm.substack.com/p/diagnosing-banshee-debuts-at-spx">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
             <div class="substack-post-embed"><p lang="en">CCA Comics Festival @ Sour Cherry, San Francisco</p><p>Tabling before the fireworks!</p><a data-post-link href="https://dahllm.substack.com/p/cca-comics-festival-sour-cherry-san">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
             <div class="substack-post-embed custom_substack_override"><p lang="en">In Banshee's Memory: Diggy Diggy Hole Game</p><p></p><a data-post-link href="https://dahllm.substack.com/p/in-banshees-memory-diggy-diggy-hole">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script><br />
             <div class="substack-post-embed"><p lang="en">Joining the Camano Arts community</p><p>First exhibit with Camano Arts Association</p><a data-post-link href="https://dahllm.substack.com/p/joining-the-camano-arts-community">Read on Substack</a></div><script async src="https://substack.com/embedjs/embed.js" charset="utf-8"></script>
             </div>
-        </div> 
             <Footer/>
-      </div> 
         </body>
 </html>

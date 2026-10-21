@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+const { hideHome = false } = Astro.props;
 ---
 <header class="top_nav libertinus-sans-regular">
    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata"></link> -->
@@ -14,13 +15,14 @@ import "../styles/global.css";
   >☰</label>
 
   <nav id="nav_menu" class="nav_menu" role="navigation" aria-label="Main">
-    <a class="top_nav_item interactable_background" href="/">HOME</a>
-    <a class="top_nav_item interactable_background" href="/comics">BOOKS</a>
-    <a class="top_nav_item interactable_background" href="/drafts">PAGES</a>
-    <a class="top_nav_item interactable_background" href="/illustrations">PICS</a>
-    <a class="top_nav_item interactable_background" href="/shop">SHOP</a>
+    {!hideHome && <a class="top_nav_item interactable_background" href="/"><img src="/assets/Site_Title.png" alt="Home" class="navigation_images"></a>}
+    <a class="top_nav_item interactable_background" href="/comics"><img src="/assets/Menu_Comics.png" alt="Comics" class="navigation_images"></a>
+    <a class="top_nav_item interactable_background" href="/drafts"><img src="/assets/Menu_Pages.png" alt="Pages" class="navigation_images"></a>
+    <a class="top_nav_item interactable_background" href="/illustrations"><img src="/assets/Menu_Drawings.png" alt="Drawings" class="navigation_images"></a>
+    <a class="top_nav_item interactable_background" href="/shop"><img src="/assets/Menu_Shop.png" alt="Shop" class="navigation_images"></a>
+        <a class="top_nav_item interactable_background" href="/events"><img src="/assets/Menu_Events.png" alt="Events" class="navigation_images"></a>
     <!-- <a class="top_nav_item interactable_background" href="/game">GAME</a> -->
-    <a class="top_nav_item interactable_background" href="/about">ABOUT LISA</a>
+    <a class="top_nav_item interactable_background" href="/about"><img src="/assets/Menu_About.png" alt="About" class="navigation_images"></a>
   </nav>
 
   <!-- Adding Libertinus Sans font 08/09/2025 -->
