@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-const { hideHome = false } = Astro.props;
 ---
 <header class="top_nav libertinus-sans-regular">
    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inconsolata"></link> -->
@@ -15,7 +14,12 @@ const { hideHome = false } = Astro.props;
   >☰</label>
 
   <nav id="nav_menu" class="nav_menu" role="navigation" aria-label="Main">
-    {!hideHome && <a class="top_nav_item interactable_background" href="/"><img src="/assets/Site_Title.png" alt="Home" class="navigation_images"></a>}
+    <a class="top_nav_item interactable_background" href="/">
+      <picture>
+        <source media="(max-width: 767px)" srcset="/assets/Site_Title.png">
+        <img src="/assets/Menu_Title.png" alt="Home" class="navigation_images">
+      </picture>
+    </a>
     <a class="top_nav_item interactable_background" href="/comics"><img src="/assets/Menu_Comics.png" alt="Comics" class="navigation_images"></a>
     <a class="top_nav_item interactable_background" href="/drafts"><img src="/assets/Menu_Pages.png" alt="Pages" class="navigation_images"></a>
     <a class="top_nav_item interactable_background" href="/illustrations"><img src="/assets/Menu_Drawings.png" alt="Drawings" class="navigation_images"></a>
@@ -23,12 +27,23 @@ const { hideHome = false } = Astro.props;
         <a class="top_nav_item interactable_background" href="/events"><img src="/assets/Menu_Events.png" alt="Events" class="navigation_images"></a>
     <!-- <a class="top_nav_item interactable_background" href="/game">GAME</a> -->
     <a class="top_nav_item interactable_background" href="/about"><img src="/assets/Menu_About.png" alt="About" class="navigation_images"></a>
+    <div class="nav_social_links" aria-label="Social and contact links">
+      <a href="https://instagram.com/dahllm" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <img src="/assets/Menu_Instagram.png" alt="Instagram" class="navigation_images">
+      </a>
+      <a href="https://dahllm.substack.com/" target="_blank" rel="noopener noreferrer" aria-label="Blog">
+        <img src="/assets/Menu_Blog.png" alt="Blog" class="navigation_images">
+      </a>
+      <a href="mailto:dahllm@gmail.com" aria-label="Email Lisa">
+        <img src="/assets/Menu_Mail.png" alt="Email" class="navigation_images">
+      </a>
+    </div>
   </nav>
 
-  <!-- Adding Libertinus Sans font 08/09/2025 -->
+  <!-- Load Open Sans for site typography. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
  <!-- <img class="logo" src="/assets/logo.png"/> -->
 </header>

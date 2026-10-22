@@ -10,7 +10,11 @@ const imageImports = import.meta.glob('../images/**/*.{png,jpg,jpeg,gif,webp,JPG
   eager: true
 });
 
-const illustrations = await getCollection("comics", ({ data }) => data.type === "illustrations");
+const illustrations = (await getCollection("comics", ({ data }) => data.type === "illustrations"))
+  .sort((a, b) => {
+    const dateDifference = Date.parse(b.data.date.replace(/\s+/g, "-")) - Date.parse(a.data.date.replace(/\s+/g, "-"));
+    return dateDifference || Number(b.data.id) - Number(a.data.id);
+  });
 
 ---
 
@@ -37,6 +41,7 @@ const illustrations = await getCollection("comics", ({ data }) => data.type === 
           imgTitle={importedImage.default}
           subtitle={entry.data.subtitle}
           lastUpdated={formatDate(entry.data.date)}
+          pagecount={entry.data.pagecount}
         />
   );
 })

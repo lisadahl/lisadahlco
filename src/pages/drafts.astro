@@ -61,6 +61,7 @@ for(var comics of ArrayOfTitles)
     return (
             <ComicPreview 
               lastUpdated={formatDate(entry.firstEntry.data.date)}
+              pagecount={entry.firstEntry.data.pagecount}
               link={`/comics/${entry.firstEntry.slug.split("/")[0]}/1`} 
               title={entry.firstEntry.data.title} 
               imgTitle={entry.imgUrl} 

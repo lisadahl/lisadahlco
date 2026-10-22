@@ -1,10 +1,13 @@
 ---
-const {title, link, subtitle, imgTitle, lastUpdated} = Astro.props;
+const {title, link, subtitle, imgTitle, lastUpdated, pagecount} = Astro.props;
 
 //console.log({ title, link, subtitle, imgTitle, lastUpdated }); // Logs all at once
 ---
 <li class = "comic_preview libertinus-sans-regular">
-    <span class="title_overlay">{title} - {lastUpdated}</span>
+    <span class="title_overlay">
+        <span class="title_overlay_title">{title}</span>
+        <span class="title_overlay_details"><i>{lastUpdated}{pagecount ? ` - ${pagecount} pages` : ""}</i></span>
+    </span>
     <a href={link} class="comic_link_wrapper">
         <img 
             src={imgTitle.src} 
